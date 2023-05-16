@@ -23,13 +23,13 @@ from utils import prepare_dataloaders
 from PIL import Image
 
 data_root = "../data"
-img_root = os.path.join(data_root, "images")
+img_root = "C:/Users/Ahmed/Documents/GitHub/fashion_compatibility_mcn/data/images"
 
 _, _, _, _, test_dataset, _ = prepare_dataloaders(root_dir=img_root, num_workers=1)
 device = torch.device('cpu')
 model = CompatModel(embed_size=1000, need_rep=True, vocabulary=2757).to(device)
 # Load pretrained weights
-model.load_state_dict(torch.load("../mcn/model_train_relation_vse_type_cond_scales.pth", map_location="cpu"))
+model.load_state_dict(torch.load("mcn/model_train_relation_vse_type_cond_scales.pth", map_location="cpu"))
 model.eval()
 for name, param in model.named_parameters():
     if 'fc' not in name:
@@ -162,7 +162,7 @@ server = app.server
 
 ################################# Layout ######################################
 
-json_file = os.path.join(data_root, "test_no_dup_with_category_3more_name.json")
+json_file = "C:/Users/Ahmed/Documents/GitHub/fashion_compatibility_mcn/data/test_no_dup_with_category_3more_name.json"
 
 json_data = json.load(open(json_file))
 json_data = {k:v for k, v in json_data.items() if os.path.exists(os.path.join(img_root, k))}
@@ -294,7 +294,7 @@ body = dbc.Row([
                 html.Img(id='accessory-img', style={"max-height": "130px", "max-width":"130px", "margin": "5px"}),
             ]),
         ])),
-        dbc.Button("Submit", id="submit-button", block=True),
+        dbc.Button("Submit", id="submit-button"),
         dbc.Card(dbc.CardBody([
             dcc.Loading(id="loading-output", children=[html.Div(html.H5("Output afte submisson"), id="output-state")], type="default")
         ])),
@@ -502,4 +502,4 @@ def toggle_collapse(n, is_open):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, host='0.0.0.0')
+    app.run_server(debug=True, host='localhost', port='8050')
