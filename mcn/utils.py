@@ -91,7 +91,7 @@ def config_logging(comment=None):
         handlers=[logging.FileHandler(log_fname), logging.StreamHandler()]
     )
 
-def prepare_dataloaders(root_dir="../data/images/", data_dir="../data/", batch_size=16, img_size=224, use_mean_img=True, neg_samples=True, num_workers=1, collate_fn=collate_fn):
+def prepare_dataloaders(root_dir="data\images", data_dir="data/", batch_size=16, img_size=224, use_mean_img=True, neg_samples=True, num_workers=0, collate_fn=collate_fn):
     transform = torchvision.transforms.Compose(
         [
             torchvision.transforms.Resize((img_size, img_size)),
@@ -126,6 +126,6 @@ def prepare_dataloaders(root_dir="../data/images/", data_dir="../data/", batch_s
         data_file="test_no_dup_with_category_3more_name.json",
     )
     test_loader = DataLoader(
-        test_dataset, batch_size=batch_size, shuffle=False, num_workers=4, collate_fn=collate_fn
+        test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, collate_fn=collate_fn
     )
     return train_dataset, train_loader, val_dataset, val_loader, test_dataset, test_loader

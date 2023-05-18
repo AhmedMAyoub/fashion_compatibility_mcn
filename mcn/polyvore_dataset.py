@@ -28,7 +28,7 @@ class CategoryDataset(Dataset):
         neg_samples: Whether generate negative sampled outfits
     """
     def __init__(self,
-                 root_dir="../data/images/",
+                 root_dir="C:/Users/Ahmed/Documents/GitHub/fashion_compatibility_mcn/data/images",
                  data_file='train_no_dup_with_category_3more_name.json',
                  data_dir="../data",
                  transform=None,
@@ -38,14 +38,14 @@ class CategoryDataset(Dataset):
         self.data_dir = data_dir
         self.transform = transform
         self.use_mean_img = use_mean_img
-        self.data = json.load(open(os.path.join(os.path.dirname(__file__), data_dir, data_file)))
+        self.data = json.load(open(os.path.join(data_dir, data_file)))
         self.data = [(k, v) for k, v in self.data.items()]
         self.neg_samples = neg_samples # if True, will randomly generate negative outfit samples
     
         self.vocabulary, self.word_to_idx = [], {}
         self.word_to_idx['UNK'] = len(self.word_to_idx)
         self.vocabulary.append('UNK')
-        with open(os.path.join(os.path.dirname(__file__), self.data_dir, 'final_word_dict.txt')) as f:
+        with open(os.path.join(self.data_dir, 'final_word_dict.txt')) as f:
             for line in f:
                 name = line.strip().split()[0]
                 if name not in self.word_to_idx:

@@ -106,7 +106,7 @@ def prepare_dataloaders(root_dir="../data/images/", data_dir="../data/", batch_s
         data_file="train_no_dup_with_category_3more_name.json",
     )
     train_loader = DataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True, num_workers=4, collate_fn=collate_fn
+        train_dataset, batch_size=batch_size, shuffle=True, num_workers=0, collate_fn=collate_fn
     )
     val_dataset = CategoryDataset(
         root_dir=root_dir,
@@ -116,7 +116,7 @@ def prepare_dataloaders(root_dir="../data/images/", data_dir="../data/", batch_s
         data_file="valid_no_dup_with_category_3more_name.json",
     )
     val_loader = DataLoader(
-        val_dataset, batch_size=batch_size, shuffle=False, num_workers=4, collate_fn=collate_fn
+        val_dataset, batch_size=batch_size, shuffle=False, num_workers=0, collate_fn=collate_fn
     )
     test_dataset = CategoryDataset(
         root_dir=root_dir,
@@ -126,6 +126,6 @@ def prepare_dataloaders(root_dir="../data/images/", data_dir="../data/", batch_s
         data_file="test_no_dup_with_category_3more_name.json",
     )
     test_loader = DataLoader(
-        test_dataset, batch_size=batch_size, shuffle=False, num_workers=4, collate_fn=collate_fn
+        test_dataset, batch_size=batch_size, shuffle=False, num_workers=0, collate_fn=collate_fn
     )
     return train_dataset, train_loader, val_dataset, val_loader, test_dataset, test_loader

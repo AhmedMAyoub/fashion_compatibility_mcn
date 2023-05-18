@@ -170,7 +170,7 @@ json_data = {k:v for k, v in json_data.items() if os.path.exists(os.path.join(im
 top_options, bottom_options, shoe_options, bag_options, accessory_options = [], [], [], [], []
 print("Load options...")
 for cnt, (iid, outfit) in enumerate(json_data.items()):
-    if cnt > 10:
+    if cnt > 20:
         break
     if "upper" in outfit:
         label = os.path.join(iid, str(outfit['upper']['index']))
